@@ -50,6 +50,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Admin', 'prefix' => 'admi
     //客户信息管理
     Route::resource('tuser', 'TuserController');
     Route::delete('admin/tuser/destoryall', ['as'=>'admin.tuser.destory.all','uses'=>'TuserController@destoryAll']);//补充resource方法
+    Route::any('admin/tuser/freezeOr', ['as'=>'admin.tuser.freezeOr','uses'=>'TuserController@freezeOr']);//ajax的冻结方法
 });
 
 

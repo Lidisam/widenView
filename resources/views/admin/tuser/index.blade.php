@@ -39,7 +39,7 @@
                                         </span>
                                     </th>
                                     <th>用户名</th>
-                                    <th>头像链接</th>
+                                    <th>头像</th>
                                     <th>冻结</th>
                                     <th>创建时间</th>
                                     <th>操作</th>
@@ -56,9 +56,13 @@
                                             </div>
                                         </td>
                                         <td>{{ $user_info->username }}</td>
-                                        <td>{{ $user_info->interlink }}</td>
-                                        <td><span class="label label-danger">是</span>
-                                            <!-- ':'<span class="label label-default">否</span> -->
+                                        <td><img src="{{ $user_info->interlink }}" title="{{ $user_info->username }}" alt="" style="width:30px;height:20px;"></td>
+                                        <td title="点击改变状态" onclick="freezeOr({{ $user_info->id }}, {{ $user_info->freeze }})">
+                                            @if(!$user_info->freeze)
+                                                <span class="label label-danger">是</span>
+                                            @else
+                                                <span class="label label-primary">否</span>
+                                            @endif
                                         </td>
                                         <td>{{ $user_info->created_at }}</td>
                                         <td>
@@ -104,6 +108,19 @@
                 successTitle: '用户删除成功'
             });
         });
+        function freezeOr(id, judge) {
+            $.ajax({
+                url: "admin/tuser/freezeOr",    //请求的url地址
+                dataType: "json",   //返回格式为json
+                async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                data: { "judge": judge,"id":id},    //参数值
+                type: "POST",   //请求方式
+                success: function(req) {
+                    //请求成功时处理
+                    window.location.reload();
+                }
+            });
+        }
     </script>
 
 @endsection

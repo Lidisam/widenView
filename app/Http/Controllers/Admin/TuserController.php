@@ -29,7 +29,7 @@ class TuserController extends BaseController
 	* @desc 获取首页数据
     */
     public function index() {
-    	return view('admin.tuser.index', ['user_infos'=>Tuser::paginate(1)]);
+    	return view('admin.tuser.index', ['user_infos'=>Tuser::paginate(10)]);
     }
 
     /**
@@ -119,4 +119,19 @@ class TuserController extends BaseController
             return redirect('admin/tuser');
         }
     }
+    /**
+     * @desc ajax的方法冻结
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function freezeOr(Request $request)
+    {
+        if($request->ajax()){
+            $user = Tuser::find($request->id);
+            $user->freeze = ($request->judge)?0:1;
+            $user->save();
+            echo json_encode(true);
+        }
+    }
+
 }
