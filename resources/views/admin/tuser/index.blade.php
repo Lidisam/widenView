@@ -40,6 +40,7 @@
                                     </th>
                                     <th>用户名</th>
                                     <th>头像</th>
+                                    <th>第三方</th>
                                     <th>冻结</th>
                                     <th>创建时间</th>
                                     <th>操作</th>
@@ -57,11 +58,18 @@
                                         </td>
                                         <td>{{ $user_info->username }}</td>
                                         <td><img src="{{ $user_info->interlink }}" title="{{ $user_info->username }}" alt="" style="width:30px;height:20px;"></td>
-                                        <td title="点击改变状态" onclick="freezeOr({{ $user_info->id }}, {{ $user_info->freeze }})">
-                                            @if(!$user_info->freeze)
+                                        <td title="第三方登录">
+                                            @if($user_info->isOther)
                                                 <span class="label label-danger">是</span>
                                             @else
                                                 <span class="label label-primary">否</span>
+                                            @endif
+                                        </td>
+                                        <td title="点击改变状态">
+                                            @if(!$user_info->freeze)
+                                                <span class="label label-danger" style="cursor:pointer" onclick="freezeOr({{ $user_info->id }}, {{ $user_info->freeze }})">是</span>
+                                            @else
+                                                <span class="label label-primary" style="cursor:pointer" onclick="freezeOr({{ $user_info->id }}, {{ $user_info->freeze }})">否</span>
                                             @endif
                                         </td>
                                         <td>{{ $user_info->created_at }}</td>

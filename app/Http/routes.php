@@ -27,6 +27,7 @@ Route::get('/', function () {
 |
 */
 
+
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
@@ -34,7 +35,7 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 
-Route::group(['middleware' => ['web'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['web','throttle:60,1'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::auth();
 
     Route::get('/home', ['as' => 'admin.home', 'uses' => 'HomeController@index']);

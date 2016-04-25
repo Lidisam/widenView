@@ -12,7 +12,8 @@
         "zizaco/entrust": "dev-laravel-5-2@dev",
         "ryan/toastr-for-laravel": "^1.0",
         "league/fractal": "^0.13.0",
-        "davejamesmiller/laravel-breadcrumbs": "^3.0"
+        "davejamesmiller/laravel-breadcrumbs": "^3.0",
+        "barryvdh/laravel-ide-helper": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

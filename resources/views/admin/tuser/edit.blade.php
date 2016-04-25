@@ -34,23 +34,24 @@
                                            data-original-title="不可重复" value="{{ $user->username }}">
                                 </div>
                             </div>
+                            @if(!$user->isOther)
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">密码</label>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">密码</label>
-
-                                <div class="col-sm-6">
-                                    <input type="password" class="form-control" name="password"
-                                           value="{{ $user->password }}">
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control" name="password"
+                                               value="{{ $user->password }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">确认密码</label>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">确认密码</label>
 
-                                <div class="col-sm-6">
-                                    <input type="password" class="form-control" name="password"
-                                           value="{{ $user->password }}">
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control" name="password"
+                                               value="{{ $user->password }}">
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">冻结</label>
