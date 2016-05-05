@@ -34,11 +34,18 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 });
 
+Route::group(['middleware' => ['throttle:60,1'], 'namespace' => 'MyApi', 'prefix' => 'api'], function () {
+    Route::post('getAuthCode', 'AuthCodeController@index'); //获取验证码接口
+    Route::post('register','AuthCodeController@register'); //注册接口
+    Route::post('login','AuthCodeController@login'); //登录接口
+});
+
 
 Route::group(['middleware' => ['web','throttle:60,1'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::auth();
 
     Route::get('/home', ['as' => 'admin.home', 'uses' => 'HomeController@index']);
+    //角色权限控制
     Route::resource('admin_user', 'AdminUserController');
     Route::delete('admin/admin_user/destoryall',['as'=>'admin.admin_user.destory.all','uses'=>'AdminUserController@destoryAll']);
     Route::resource('role', 'RoleController');
